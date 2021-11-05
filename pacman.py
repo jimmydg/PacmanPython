@@ -1,22 +1,32 @@
 import PySimpleGUI as sg
+from dataclasses import dataclass
+
+
+@dataclass
+class Pacman:
+    x: int
+    y: int
+    graph: sg.Graph
+    direction: str
 
 
 def main():
-    """
+    layout_name = 'graph'
 
-
-    :return:
-    """
     layout = [
-        [sg.Graph(canvas_size=(400, 400), graph_bottom_left=(0, 0), graph_top_right=(400, 400), background_color='red',
-                  key='graph')],
+        [sg.Graph(
+            canvas_size=(400, 400),
+            graph_bottom_left=(0, 0),
+            graph_top_right=(400, 400),
+            background_color='black',
+            key=layout_name)],
         [sg.T('Use arrow keys to navigate')]
     ]
 
     window = sg.Window('Pac-Man - Jimmy de Graaf', layout, finalize=True)
 
-    graph = window['graph']
-    circle = graph.DrawCircle((75, 75), 25, fill_color='black', line_color='white')
+    graph = window[layout_name]
+    circle = graph.DrawCircle((200, 200), 25, fill_color='black', line_color='white')
 
     keycode = {
         'up_arrow': 38,
