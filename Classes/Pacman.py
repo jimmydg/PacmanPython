@@ -1,6 +1,11 @@
 from dataclasses import dataclass
 import PySimpleGUI as sg
 
+"""
+Private constants used for determining when the figure reaches the outside of the game layout
+This number is heavily dependent on the size of the game layout. I couldn't find a nice way to determine the exact
+coordinates when Pacman reaches the end of the screen, so hardcode it instead.
+"""
 TOP_LEFT_BOUNDING_LIMIT = 10
 BOTTOM_RIGHT_BOUNDING_LIMIT = 390
 
