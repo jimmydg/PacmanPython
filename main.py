@@ -7,10 +7,12 @@ WINDOW_CLOSED = sg.WIN_CLOSED
 
 def event_loop():
     """
-    Responsible for displaying and interacting with the GameWindow using an event loop
+    The event loop is the heart of the application. It is responsible for displaying and interacting with the
+    GameWindow object.
     """
 
     while True:
+        # Read all the data (events, key presses, coords etc) from the Window class
         event, values = game_window.read()
 
         # Check if the user wants to quit or if the window is closed forcefully
@@ -20,7 +22,7 @@ def event_loop():
         # The +KEY+ event is tied to when a button is pressed
         if event == "+KEY+":
 
-            # Match the keypress to a pre-determined list of possible keycodes. If no match is found, do nothing
+            # Match the keypress to a predefined list of possible keycodes. If no match is found, do nothing
             window_key_event = game_window.get_window_key_event()
 
             if window_key_event in keycode['up_arrow']:
@@ -34,16 +36,21 @@ def event_loop():
 
 
 if __name__ == '__main__':
-    # Draw the game window layout
+    """
+    Main class which is used for instantiating the classes and fire up the event loop
+    """
+
+    # Call the GameWindow() object and instantiate a Window element to show on the screen
     game_window = GameWindow()
 
-    # Retrieve list of legal key presses
+    # A list of predefined keycodes is managed in the GameWindow object
     keycode = game_window.get_keycodes()
 
-    # Draw Pacman
+    # Instantiate a Pacman() object. Movement and bounding limits are managed in this object.
     pacman = Pacman(
         game_window.get_figure(),
         game_window.get_window_layout()
     )
 
+    # Fire up the event loop and wait for events.
     event_loop()

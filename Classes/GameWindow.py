@@ -8,8 +8,13 @@ GAME_SIZE = 400
 
 class GameWindow:
     """
-    The GameWindow class represents all the contents and behaviour of the window
+    The GameWindow class represents all the contents and behaviour of the window.
+
+    Inside the objects constructor method the Window is instantiated by assigning the private variable "self.window"
+    to a full fledged PySimpleGUI Window object containing the game layout. When the Pacman object is instantiated
+    the get_figure() function is called which places the drawing inside the game layout.
     """
+
     def __init__(self):
         self.window = sg.Window(GAME_WINDOW_TITLE, self.game_layout(), finalize=True)
         self.window.bind("<Key>", "+KEY+")
@@ -44,7 +49,7 @@ class GameWindow:
 
     def read(self):
         """
-        Helper method to receive event values in the main event loop
+        Helper method to receive all the data (events, key presses, coords) from the Window class
         """
         return self.window.read()
 
@@ -71,6 +76,7 @@ class GameWindow:
 
     def get_window_key_event(self):
         """
-        Get the user key press in lowercase form
+        Get the user key press in lowercase form. "keysym" is a string name for the key which is pressed.
+        For peace of mind, lowercase the output so we don't screw up along the way.
         """
         return self.window.user_bind_event.keysym.lower()
